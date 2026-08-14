@@ -23,16 +23,25 @@ export default function Header({ search, setSearch, setViewMode }: HeaderProps) 
       <input
         type="text"
         placeholder="Buscar Pokémon"
+        aria-label="Buscar Pokémon por nome"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className={styles.search}
       />
 
       <div className={styles.buttonGroup}>
-        <button onClick={() => setViewMode("list")} className={styles.button}>
+        <button
+          type="button"
+          onClick={() => setViewMode("list")}
+          className={styles.button}
+        >
           Lista
         </button>
-        <button onClick={() => setViewMode("card")} className={styles.button}>
+        <button
+          type="button"
+          onClick={() => setViewMode("card")}
+          className={styles.button}
+        >
           Card
         </button>
         <Link href="/favoritos" className={styles.button}>⭐ Favoritos</Link>
