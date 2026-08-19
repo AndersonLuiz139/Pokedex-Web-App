@@ -18,7 +18,12 @@ export default function Page() {
 
   return (
     <>
-      <Header search={search} setSearch={setSearch} setViewMode={setViewMode} />
+      <Header
+        search={search}
+        setSearch={setSearch}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
+      />
       <main className={styles.content}>
         {isLoading ? (
           <p className={styles.feedback} role="status">
