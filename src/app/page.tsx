@@ -5,18 +5,23 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PokeCard from "./components/PokeCard";
 import PokeList from "./components/PokeList";
+import { usePokemon } from "./hooks/usePokemon";
 
 export default function Page() {
   const [search, setSearch] = useState("");
   const [viewMode, setViewMode] = useState<"card" | "list">("card");
+  const pokemons = usePokemon();
+  const filteredPokemons = pokemons.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <>
       <Header search={search} setSearch={setSearch} setViewMode={setViewMode} />
       {viewMode === "card" ? (
-        <PokeCard search={search} />
+        <PokeCard pokemons={filteredPokemons} />
       ) : (
-        <PokeList search={search} />
+        <PokeList pokemons={filteredPokemons} />
       )}
       <Footer />
     </>
