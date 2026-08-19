@@ -17,12 +17,17 @@ const POKEMON_LIMIT = 151;
 
 export function usePokemon() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let isMounted = true;
 
     async function loadPokemon() {
       try {
+        setIsLoading(true);
+        setError(null);
+
         const { data } = await api.get<PokemonListResponse>("/pokemon", {
           params: { limit: POKEMON_LIMIT },
         });
@@ -37,7 +42,12 @@ export function usePokemon() {
           }))
         );
       } catch {
-        if (isMounted) setPokemons([]);
+        if (isMounted) {
+          setPokemons([]);
+          setError("Não foi possível carregar os Pokémon. Tente novamente mais tarde.");
+        }
+      } finally {
+        if (isMounted) setIsLoading(false);
       }
     }
 
@@ -48,5 +58,5 @@ export function usePokemon() {
     };
   }, []);
 
-  return pokemons;
+  return { pokemons, isLoading, error };
 }
