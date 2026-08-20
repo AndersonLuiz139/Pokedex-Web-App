@@ -91,7 +91,7 @@ export function usePokemon() {
           data.results.map((pokemon, index) => ({
             id: index + 1,
             name: pokemon.name,
-            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
+            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`,
             types: (typesByPokemon.get(index + 1) ?? [])
               .sort((first, second) => first.slot - second.slot)
               .map((type) => type.name),
