@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Pokemon } from "../../hooks/usePokemon";
+import PokemonTypes from "../PokemonTypes";
 import styles from "./style.module.css";
 
 type Props = {
@@ -27,6 +28,7 @@ export default function PokeList({ pokemons }: Props) {
               <div>
                 <span className={styles.number}>Nº {String(p.id).padStart(3, "0")}</span>
                 <p className={styles.name}>{p.name}</p>
+                <PokemonTypes types={p.types} />
               </div>
             </Link>
           </li>

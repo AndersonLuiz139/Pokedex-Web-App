@@ -64,7 +64,7 @@
 }
 
 .name {
-  margin-top: 2px;
+  margin: 2px 0 6px;
   color: var(--grey-dark);
   font-size: 1.05rem;
   font-weight: 700;
