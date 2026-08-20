@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useFavorites } from "../../hooks/FavoriteContext";
 import type { Pokemon } from "../../hooks/usePokemon";
 import styles from "./style.module.css";
@@ -24,13 +25,31 @@ export default function PokeCard({ pokemons }: Props) {
           <li key={p.id} className={styles.card}>
             {/* link para a página de detalhes */}
             <Link href={`/detalhes/${p.id}`} className={styles.link}>
-              <img src={p.image} alt={p.name} className={styles.image} />
-              <p className={styles.name}>#{p.id} {p.name}</p>
+              <div className={styles.imageWrapper}>
+                <Image
+                  src={p.image}
+                  alt={`Sprite de ${p.name}`}
+                  width={180}
+                  height={180}
+                  sizes="(max-width: 560px) 160px, 180px"
+                  className={styles.image}
+                />
+              </div>
+              <span className={styles.number}>Nº {String(p.id).padStart(3, "0")}</span>
+              <p className={styles.name}>{p.name}</p>
             </Link>
 
             <button
-              className={styles.favoriteBtn}
+              type="button"
+              className={`${styles.favoriteBtn} ${
+                isFavorite(p.id) ? styles.isFavorite : ""
+              }`}
               onClick={() => handleFavorite(p)}
+              aria-label={
+                isFavorite(p.id)
+                  ? `Remover ${p.name} dos favoritos`
+                  : `Adicionar ${p.name} aos favoritos`
+              }
             >
               {isFavorite(p.id) ? "★ Remover" : "☆ Favoritar"}
             </button>

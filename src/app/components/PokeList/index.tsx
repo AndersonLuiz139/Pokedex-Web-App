@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Pokemon } from "../../hooks/usePokemon";
 import styles from "./style.module.css";
 
@@ -13,10 +14,20 @@ export default function PokeList({ pokemons }: Props) {
         {pokemons.map((p) => (
           <li key={p.id} className={styles.listItem}>
             <Link href={`/detalhes/${p.id}`} className={styles.link}>
-              <img src={p.image} alt={p.name} className={styles.image} />
-              <p className={styles.name}>
-                #{p.id} {p.name}
-              </p>
+              <div className={styles.imageWrapper}>
+                <Image
+                  src={p.image}
+                  alt={`Sprite de ${p.name}`}
+                  width={76}
+                  height={76}
+                  sizes="76px"
+                  className={styles.image}
+                />
+              </div>
+              <div>
+                <span className={styles.number}>Nº {String(p.id).padStart(3, "0")}</span>
+                <p className={styles.name}>{p.name}</p>
+              </div>
             </Link>
           </li>
         ))}
