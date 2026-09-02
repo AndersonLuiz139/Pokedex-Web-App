@@ -1,15 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-:root{
-  --primary: #dee2e6;
-
-  --red: #cc282b;
-  --grey: #d3d3d3;
-  --grey-dark: #161a1d;
-  --hover: #adb5bd;
+:root {
+  --primary: #f1f5f9;
+  --surface: #ffffff;
+  --surface-muted: #e2e8f0;
+  --red: #e3353e;
+  --red-dark: #bb2530;
+  --grey: #f8fafc;
+  --grey-dark: #172033;
+  --hover: #cbd5e1;
+  --text-muted: #64748b;
+  --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 12px 28px rgba(15, 23, 42, 0.14);
 }
 
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -19,7 +24,28 @@
   outline: none;
 }
 
-body{
+html {
   background-color: var(--primary);
+}
+
+body {
+  min-width: 320px;
+  background: var(--primary);
+  color: var(--grey-dark);
   font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: #fecdd3;
+  color: var(--grey-dark);
 }

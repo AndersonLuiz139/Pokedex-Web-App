@@ -37,7 +37,25 @@
   color: #fff;
   width: 100%;
   padding: 10px;
+  cursor: pointer;
 }
+
+.backBtn {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: var(--grey);
+  color: #333;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.backBtn:hover {
+  background-color: #bbb;
+}
+
 
 @media (min-width: 700px) {
   .grid {

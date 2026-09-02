@@ -1,40 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
+import Link from "next/link";
+import Image from "next/image";
 import { useFavorites } from "../../hooks/FavoriteContext";
+import type { Pokemon } from "../../hooks/usePokemon";
+import PokemonTypes from "../PokemonTypes";
 import styles from "./style.module.css";
 
-type Pokemon = {
-  id: number;
-  name: string;
-  image: string;
-};
-
 type Props = {
-  search: string;
+  pokemons: Pokemon[];
 };
 
-export default function PokeCard({ search }: Props) {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const { favorites, addFavorite, removeFavorite, isFavorite } = useFavorites();
-
-  useEffect(() => {
-    axios.get("https://pokeapi.co/api/v2/pokemon?limit=151").then((res) => {
-      const formatted = res.data.results.map((p: any, index: number) => ({
-        id: index + 1,
-        name: p.name,
-        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-          index + 1
-        }.png`,
-      }));
-      setPokemons(formatted);
-    });
-  }, []);
-
-  const filtered = pokemons.filter((p) =>
-    p.name.toLowerCase().includes(search.toLowerCase())
-  );
+export default function PokeCard({ pokemons }: Props) {
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 
   const handleFavorite = (pokemon: Pokemon) => {
     if (isFavorite(pokemon.id)) removeFavorite(pokemon.id);
@@ -44,11 +22,37 @@ export default function PokeCard({ search }: Props) {
   return (
     <div className={styles.container}>
       <ul className={styles.grid}>
-        {filtered.map((p) => (
+        {pokemons.map((p) => (
           <li key={p.id} className={styles.card}>
-            <img src={p.image} alt={p.name} className={styles.image} />
-            <p className={styles.name}>#{p.id} {p.name}</p>
-            <button className={styles.favoriteBtn} onClick={() => handleFavorite(p)}>
+            {/* link para a página de detalhes */}
+            <Link href={`/detalhes/${p.id}`} className={styles.link}>
+              <div className={styles.imageWrapper}>
+                <Image
+                  src={p.image}
+                  alt={`Sprite de ${p.name}`}
+                  width={180}
+                  height={180}
+                  sizes="(max-width: 560px) 160px, 180px"
+                  className={styles.image}
+                />
+              </div>
+              <span className={styles.number}>Nº {String(p.id).padStart(3, "0")}</span>
+              <p className={styles.name}>{p.name}</p>
+              <PokemonTypes types={p.types} />
+            </Link>
+
+            <button
+              type="button"
+              className={`${styles.favoriteBtn} ${
+                isFavorite(p.id) ? styles.isFavorite : ""
+              }`}
+              onClick={() => handleFavorite(p)}
+              aria-label={
+                isFavorite(p.id)
+                  ? `Remover ${p.name} dos favoritos`
+                  : `Adicionar ${p.name} aos favoritos`
+              }
+            >
               {isFavorite(p.id) ? "★ Remover" : "☆ Favoritar"}
             </button>
           </li>

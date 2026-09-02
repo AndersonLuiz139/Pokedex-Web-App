@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚡ Pokédex com Next.js
 
-## Getting Started
+Este é um projeto **Pokédex** desenvolvido com **Next.js**, consumindo a **PokeAPI** para exibir informações sobre Pokémons.  
+O usuário pode pesquisar, visualizar detalhes e **favoritar Pokémons**, com persistência de favoritos no **localStorage**.  
 
-First, run the development server:
+---
+
+## 🌟 Funcionalidades
+
+- 🔍 **Listagem de Pokémons:** Exibe Pokémons com ID, nome e imagem.  
+- ⭐ **Favoritos:** Usuários podem favoritar/desfavoritar Pokémons (persistido no `localStorage`).  
+- 📖 **Detalhes do Pokémon:** Exibição de informações detalhadas de cada Pokémon.  
+- 🔄 **Alternar entre Lista e Card View** (opcional no header).  
+- ⬅️ **Botão de voltar** na página de favoritos.    
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Next.js** → Framework React para renderização híbrida.  
+- **TypeScript** → Tipagem estática para mais segurança no código.  
+- **Axios** → Requisições HTTP para consumir a API.  
+- **CSS Modules** → Estilização com escopo local.  
+- **PokeAPI** → API pública de Pokémons.  
+
+---
+
+## 🚀 Instalação e Execução do Projeto
+Siga os passos abaixo para rodar o projeto localmente.
+
+### 🔄 1. Clonar o Repositório
+
+```bash
+git clone https://github.com/seu-usuario/pokedex.git
+cd pokedex
+```
+
+### 2️⃣ Instalar dependências
+
+```bash
+npm install
+npm install axios
+```
+
+### 3️⃣ Rodar o servidor de desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+O projeto ficara disponível em:
+```bash
+http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 📂 Estrutura de Pastas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+📦 pokedex
+ ┣ 📂 app
+ ┃ ┣ 📂 components      # Componentes reutilizáveis (Header, Footer, etc.)
+ ┃ ┣ 📂 favoritos       # Página de favoritos
+ ┃ ┣ 📂 hooks           # Custom Hook (useFavorites)
+ ┃ ┣ 📂 styles          # CSS Modules
+ ┃ ┣ page.tsx           # Página principal
+ ┃ ┗ layout.tsx         # Layout base
+ ┣ 📜 package.json
+ ┣ 📜 README.md
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🔑 Principais Endpoints da PokeAPI usados
 
-## Learn More
+Listar Pokémons (limitado a 151):
+```bash
+GET https://pokeapi.co/api/v2/pokemon?limit=100
+```
 
-To learn more about Next.js, take a look at the following resources:
+Buscar detalhes de um Pokémon
+```bash
+GET https://pokeapi.co/api/v2/pokemon/{id}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎮 Como Usar
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Abra o projeto em `http://localhost:3000/`.  
+2. Veja a lista de Pokémons com **ID, Nome e Imagem**.  
+3. Clique no botão ⭐ para **favoritar/desfavoritar** um Pokémon.  
+4. Vá até a aba **Favoritos** e visualize todos os Pokémons salvos.  
+5. Clique em ⬅️ **Voltar** para retornar à lista principal.
 
-## Deploy on Vercel
+### 👨‍💻 Autor
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Projeto desenvolvido por Anderson Luiz.
+📧 Contato: namechina09@gmail.com
+🔗 GitHub: https://github.com/AndersonLuiz139
